@@ -7,13 +7,11 @@ RUN go mod download
 
 COPY ./catgpt/ ./
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /go/bin/app
+RUN CGO_ENABLED=0 GOARCH=amd64  go build -o /go/bin/app
 
 FROM gcr.io/distroless/static-debian12:latest-amd64
 
 COPY --from=build /go/bin/app /
 
 EXPOSE 8080 9090
-
-USER 65532
 CMD ["/app"]

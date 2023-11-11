@@ -1,0 +1,16 @@
+#cloud-config
+runcmd:
+  - wget -O - https://monitoring.api.cloud.yandex.net/monitoring/v2/unifiedAgent/config/install.sh | bash
+write_files:
+  - path: /etc/yc/unified_agent/conf.d/pull_agent.yml
+    content: |
+      routes:
+        - input:
+            plugin: metrics_pull
+            config:
+              url: http://localhost:9090/metrics
+              format:
+                prometheus: {}
+          channel:
+            channel_ref:
+              name: cloud_monitoring

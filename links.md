@@ -1,0 +1,1 @@
+https://cloud.yandex.ru/docs/compute/concepts/vm-metadata
